@@ -16,6 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+
         return view('dashboard',compact('users'));
     }
 
@@ -37,7 +38,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
     }
 
     /**
@@ -60,7 +60,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('user.edit',compact('user'));
+        return view('users.edit',compact('user'));
     }
 
     /**
@@ -102,7 +102,7 @@ class UserController extends Controller
 
 
 
-        return redirect('/posts');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -116,12 +116,12 @@ class UserController extends Controller
         //
     }
 
-    public function ban($id){
+    public function banuser($id){
         $user = User::find($id);
-        return view('user.banuser',compact('user'));
+        return view('users.ban',compact('user'));
     }
 
-    public function banuser(Request $request,$id){
+    public function ban(Request $request,$id){
         $request->validate([
             'bandate' => ['required', 'string'],
         ]);
@@ -129,10 +129,16 @@ class UserController extends Controller
         $newformat = date('Y-m-d',$time);
 
         User::find($id)->update([
-            'is_banned' => 1,
             'banned_until'=> $newformat,
         ]);
-        return redirect('/posts');
+        return redirect()->route('users.index');
+    }
+    public function unban(Request $request,$id){
+
+        User::find($id)->update([
+            'banned_until'=> null,
+        ]);
+        return redirect()->route('users.index');
     }
 
 }

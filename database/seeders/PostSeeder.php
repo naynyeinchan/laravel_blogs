@@ -21,7 +21,7 @@ class PostSeeder extends Seeder
             DB::table('posts')->insert([
                 'title' => Str::random(10).$i,
                 'content' => Str::random(500),
-                'user_id'=>1,
+                'user_id'=>2,
                 'created_at'=>now(),
             ]);
         }

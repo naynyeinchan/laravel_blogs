@@ -18,10 +18,11 @@ Route::get('/', function () {
 });
 
 Route::resource('posts',\App\Http\Controllers\PostController::class);
-Route::resource('user',\App\Http\Controllers\UserController::class);
+Route::resource('users',\App\Http\Controllers\UserController::class);
 
-Route::get('user/{user}/ban',[UserController::class,'ban'])->name('user.ban');
-Route::put('user/{user}/banning',[UserController::class,'banuser'])->name('user.banuser');
+Route::get('users/{users}/banuser',[UserController::class,'banuser'])->name('users.banuser');
+Route::put('users/{users}/ban',[UserController::class,'ban'])->name('users.ban');
+Route::put('users/{users}/unban',[UserController::class,'unban'])->name('users.unban');
 
 
 Route::get('/dashboard', function () {

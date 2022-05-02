@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <div class="p-4 max-w bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-4 max-w bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-900 dark:border-gray-700">
                         <div class="flex justify-between items-center mb-4">
                             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Users List</h5>
                         </div>
@@ -35,9 +35,19 @@
                                                 <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                                     {{$user->email}}
                                                 </p>
+                                                @if($user->banned_until != null)
+                                                        <p class="font-semibold text-red-900">This account is temporary in ban!!!</p>
+                                                @endif
+                                                @if($user->is_admin != null)
+                                                    <p class="font-semibold text-gray-400">This account is an admin account!</p>
+                                                @endif
                                             </div>
                                             <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                                <a href="{{route('user.ban',$user->id)}}" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onclick="return confirm('Are you sure you want to ban?')">Ban</a>
+                                                <a href="{{route('users.banuser',$user->id)}}" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onclick="return confirm('Are you sure you want to ban?')">Ban</a>
+                                                <form action="{{route('users.unban',$user->id)}}" method="POST">
+                                                    @csrf @method('PUT')
+                                                    <button type="submit" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" onclick="return confirm('Are you sure you want to unban?')">Unban</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </li>

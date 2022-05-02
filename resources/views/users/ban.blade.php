@@ -7,7 +7,7 @@
     <x-slot name="slot">
         <div class="flex justify-center">
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                <form action="{{route('user.banuser',$user->id)}}" method="POST">
+                <form action="{{route('users.ban',$user->id)}}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="relative">

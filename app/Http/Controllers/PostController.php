@@ -17,10 +17,6 @@ class PostController extends Controller
      */
     public function index()
     {
-        $id = Auth::user()->id;
-        User::find($id)->update([
-            'is_banned'=>0
-        ]);
         $posts = Post::all()->sortByDesc('created_at');
         return view('post.index',compact('posts'));
     }
@@ -55,7 +51,7 @@ class PostController extends Controller
             'content' => $request->content,
             'user_id' => $request->userid,
         ]);
-        return redirect('/posts');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -98,7 +94,7 @@ class PostController extends Controller
             'title'=> $request->title,
             'content'=>$request->content,
         ]);
-        return redirect('/posts');
+        return redirect()->route('users.index');
 
     }
 
@@ -111,6 +107,6 @@ class PostController extends Controller
     public function destroy($id)
     {
         Post::find($id)->delete();
-        return redirect('/posts');
+        return redirect()->route('users.index');
     }
 }

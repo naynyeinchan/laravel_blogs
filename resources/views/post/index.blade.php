@@ -22,12 +22,11 @@
                             <div class="flex flex-col ml-3 mr-3">
                                 <h2 class="mb-0 font-semibold">{{$post->user->name}}</h2>
                                 <p class="mt-0 text-sm text-gray-600">{{$post->created_at?->diffForHumans()}}</p>
+                                @if($post->user->banned_until != null)
+                                    <p class="font-semibold text-sm text-red-900">This account is temporary in ban!!!</p>
+                                @endif
                             </div>
-                            @if($post->user->is_banned == 1)
-                                <div class="ml-2">
-                                    <p class="font-semibold text-red-900">This account is temporary in ban!!!</p>
-                                </div>
-                            @endif
+
                         </div>
 
                         <div class="mr-4 mt-2">
@@ -53,7 +52,7 @@
                                                 <button type="submit" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-300 dark:hover:text-red-700 w-full">Delete</button>
                                             @else
                                                 @if(Auth::user()->is_admin == 1)
-                                                    <a href="{{route('user.ban',$post->user->id)}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-300 dark:hover:text-red-800 text-center text-red-900">!Ban This User!</a>
+                                                    <a href="{{route('users.banuser',$post->user->id)}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-300 dark:hover:text-red-800 text-center text-red-900">!Ban This User!</a>
                                                 @else
                                                     <p class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-300 dark:hover:text-red-700 w-full">You are not the owner of this post!</p>
                                                 @endif

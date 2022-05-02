@@ -7,7 +7,7 @@
     <x-slot name="slot">
         <div class="flex justify-center">
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                <form action="{{route('user.update',$user->id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('users.update',$user->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 

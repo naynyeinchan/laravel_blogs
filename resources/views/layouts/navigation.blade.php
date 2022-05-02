@@ -18,11 +18,11 @@
                     <x-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create')">
                         {{ __('Create New Post') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('user.edit',[Auth::user()->id])" :active="request()->routeIs('user.edit')">
+                    <x-nav-link :href="route('users.edit',[Auth::user()->id])" :active="request()->routeIs('users.edit')">
                         {{ __('Edit Profile') }}
                     </x-nav-link>
                     @if(Auth::user()->is_admin == 1)
-                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                         {{ __('Admin Dashboard') }}
                     </x-nav-link>
                     @endif
